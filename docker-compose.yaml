@@ -1,0 +1,25 @@
+services:
+  transcriber:
+    build:
+      context: ./app
+    container_name: transcriber
+    ports:
+      - 2222:2222 
+    #mock volumes
+    volumes:
+      - ./app/input:/app/input
+      - ./app/output:/app/output
+    stdin_open: true
+    tty: true
+    #restart: unless-stopped
+  
+  # recipe-ocr:
+  #   build:
+  #     context: ./app
+  #   container_name: recipe-ocr
+  #   volumes:
+  #     - ./app/models:/app/models
+  #     - ./app/output:/app/output
+  #   stdin_open: true
+  #   tty: true
+  #   #restart: unless-stopped
