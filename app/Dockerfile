@@ -8,11 +8,12 @@ WORKDIR /app
 COPY . /app
 
 # install dependencies
-#RUN go mod download
+RUN go mod download
 
 # build
-#RUN go build -o main .
+RUN go build -o main ./src
 
 # run
-CMD ["go", "run", "./src/main.go", "&"]
-
+#CMD ["go", "run", "./src/main.go", "&"]
+#CMD ["go", "run", "./src/apicomm.go", "&"]
+CMD ["./main"]
