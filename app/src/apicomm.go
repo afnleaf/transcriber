@@ -13,7 +13,7 @@ import (
     "google.golang.org/api/option"
 )
 
-func main() {
+func img() {
     // Load environment variables from .env file
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -47,4 +47,36 @@ func main() {
 
     // View the response.
     fmt.Printf("Uploaded file %s as: %q\n", img1.DisplayName, img1.URI)
-} 
+}
+
+func txt() {
+    fmt.Print("txt()\n")
+    // Load environment variables from .env file
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+    ctx := context.Background()
+    // Access your API key as an environment variable (see "Set up your API key" above)
+    client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("API_KEY")))
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer client.Close()
+    
+    model := client.GenerativeModel("gemini-1.5-flash")
+
+    resp, err := model.GenerateContent(ctx, genai.Text("Write a story about a AI and magic"))
+    if err != nil {
+      log.Fatal(err)
+    }
+    //fmt.Printf("%+v", resp)
+    fmt.Printf("%s\n", resp.Candidates[0])
+    //fmt.Printf("%s\n", resp.Content)
+}
+
+func main() {
+    fmt.Print("he;lloloel\n")
+    txt()
+}
